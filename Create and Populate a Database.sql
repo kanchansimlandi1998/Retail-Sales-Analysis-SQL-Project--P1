@@ -1,8 +1,8 @@
-Within this database, design and create two related tables, such as 'Students' and 'Courses'
-Columns of Students table- Roll_no(Primary),Student_name,Age,DOB,Class
-Columns of Courses-Course_id(Primary),Course_name,Course_duration,Faculty_name
-Populate these tables with sample data(10 records each)
-Write SQL queries to retrieve information about enrolled students and their courses.
+-- Within this database, design and create two related tables, such as 'Students' and 'Courses'
+-- Columns of Students table- Roll_no(Primary),Student_name,Age,DOB,Class
+-- Columns of Courses-Course_id(Primary),Course_name,Course_duration,Faculty_name
+-- Populate these tables with sample data(10 records each)
+-- Write SQL queries to retrieve information about enrolled students and their courses.
 
 -- 1.Create a new database with a specific name- school_database
 CREATE DATABASE school_database;
@@ -425,5 +425,50 @@ select max(product_cost) As max_cost from products;
 select min(product_cost) As max_cost from products;
 
 
+-- DENSE RANK() AND RANK() IN SQL
+
+CREATE DATABASE college;
+use college;
+
+create table person(
+Name varchar(45) NOT NULL,  
+  Product varchar(45) DEFAULT NULL,  
+  Country varchar(25) DEFAULT NULL,  
+  Year int NOT NULL  
+);
 
 
+INSERT INTO Person(Name, Product, Country, Year)   
+VALUES ('Stephen', 'Computer', 'USA', 2015),   
+('Joseph', 'Laptop', 'India', 2016),   
+('John', 'TV', 'USA', 2016),  
+('Donald', 'Laptop', 'England', 2015),  
+('Joseph', 'Mobile', 'India', 2015),  
+('Peter', 'Mouse', 'England', 2016);  
+
+
+
+
+CREATE TABLE student_scores (
+    student_id INT,
+    subject VARCHAR(50),
+    score INT
+);
+truncate student_scores;
+
+INSERT INTO student_scores VALUES
+(1, 'Math', 80),
+(1, 'English', 75),
+(1, 'Science', 90),
+(2, 'Math', 95),
+(2, 'English', 85),
+(2, 'Science', 90),
+(3, 'Math', 80),
+(3, 'English', 85),
+(3, 'Science', 80);
+
+-- DENSE RANK() query 
+
+SELECT student_id, subject, score, 
+       DENSE_RANK() OVER (PARTITION BY subject ORDER BY score DESC) AS new_rank 
+FROM student_scores;
