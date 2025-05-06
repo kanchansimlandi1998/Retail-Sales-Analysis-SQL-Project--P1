@@ -472,3 +472,9 @@ INSERT INTO student_scores VALUES
 SELECT student_id, subject, score, 
        DENSE_RANK() OVER (PARTITION BY subject ORDER BY score DESC) AS new_rank 
 FROM student_scores;
+
+
+
+SELECT student_id, subject, score, 
+      RANK() OVER (PARTITION BY subject ORDER BY score DESC) AS new_rank1 
+FROM student_scores;
